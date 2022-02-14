@@ -23,12 +23,12 @@ public class UserService implements IUserService {
     private IAlertService alertService;
     private ILoggingService loggingService;
 
-    public UserService(UserRepository theRepo, AccountService theAccountService, BCryptPasswordEncoder bCryptPasswordEncoder,
+    public UserService(UserRepository theRepo, AccountService theAccountService,
                        AlertService alertService, LoggingService loggingService) {
         super();
         userRepository = theRepo;
         this.accountService = theAccountService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
         alertService = alertService;
         loggingService = loggingService;
 
@@ -49,7 +49,7 @@ public class UserService implements IUserService {
         Account account = new Account();
         account.setUser(theUser);
         account.setAccount_name(theUser.getFirst_name() + " " + theUser.getLast_name());
-        account.setAccount_type(BankConstants.PRIVATE_ACCOUNT_TYPE);
+        account.setAccount_type("PRIVATE");
         account.setAccount_number(generateAccountNumber());
         Account theAccount = accountService.create(account);
         theUser.addAccount(theAccount);
@@ -62,7 +62,6 @@ public class UserService implements IUserService {
         userResponse.setFirst_name(finalUser.getFirst_name());
         userResponse.setPhone_number(finalUser.getPhone_number());
         userResponse.setCredit_transactions(finalUser.getCredit_transactions());
-        userResponse.setDebit_transactions(finalUser.getDebit_transactions());
         userResponse.setId(finalUser.getId());
 
 //        Send alert and log the event
@@ -94,7 +93,6 @@ public class UserService implements IUserService {
         userResponse.setFirst_name(theUser.getFirst_name());
         userResponse.setPhone_number(theUser.getPhone_number());
         userResponse.setCredit_transactions(theUser.getCredit_transactions());
-        userResponse.setDebit_transactions(theUser.getDebit_transactions());
         userResponse.setId(theUser.getId());
         return userResponse;
     }

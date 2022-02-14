@@ -2,7 +2,6 @@ package com.lucky.OkoedionBank.Services.impl;
 
 import com.lucky.OkoedionBank.Pojo.BankAlert;
 import com.lucky.OkoedionBank.Services.IAlertService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.twilio.Twilio;
@@ -22,8 +21,8 @@ public class AlertService implements IAlertService {
 
 //        TODO - hide keys and use System.getenv
 
-        ACCOUNT_SID = "AC1e85456eee171478ea4d4de4fd73001a";
-        AUTH_TOKEN = "49e5c27b63f110f8832fbfa14d15a844";
+        ACCOUNT_SID = "";
+        AUTH_TOKEN = "";
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
 

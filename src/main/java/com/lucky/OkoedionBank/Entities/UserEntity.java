@@ -27,8 +27,6 @@ public class UserEntity {
     private List<Account> accounts = new ArrayList<>();
     @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreditTransactions> credit_transactions = new ArrayList<>();
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DebitTransactions> debit_transactions = new ArrayList<>();
 
     public UserEntity() {
 
@@ -36,13 +34,11 @@ public class UserEntity {
 
     public UserEntity(String email, String first_name, String last_name,
                       String phone_number, String address, String password,
-                      List<Account> accounts, List<CreditTransactions> credit_transactions,
-                      List<DebitTransactions> debit_transactions) {
+                      List<Account> accounts, List<CreditTransactions> credit_transactions) {
         super();
         this.accounts = accounts;
         this.address = address;
         this.credit_transactions = credit_transactions;
-        this.debit_transactions = debit_transactions;
         this.first_name = first_name;
         this.email = email;
         this.last_name = last_name;
@@ -52,26 +48,24 @@ public class UserEntity {
 
 
     public void addAccount(Account theAccount) {
-
+        accounts.add(theAccount);
+        theAccount.setUser(this);
     }
 
     public void removeAccount(Account theAccount) {
-
+        accounts.remove(theAccount);
+        theAccount.setUser(null);
     }
 
     public void addCreditTransaction(CreditTransactions theCreditTrans) {
+        credit_transactions.add(theCreditTrans);
+        theCreditTrans.setRecipient(this);
 
     }
 
     public void removeCreditTransaction(CreditTransactions theCreditTrans) {
-
-    }
-
-    public void addDebitTransaction(DebitTransactions theDebitTrans) {
-
-    }
-
-    public void removeDebitTransaction(DebitTransactions theDebitTrans) {
+        credit_transactions.remove(theCreditTrans);
+        theCreditTrans.setRecipient(null);
 
     }
 
@@ -148,13 +142,6 @@ public class UserEntity {
         this.credit_transactions = credit_transactions;
     }
 
-    public List<DebitTransactions> getDebit_transactions() {
-        return debit_transactions;
-    }
-
-    public void setDebit_transactions(List<DebitTransactions> debit_transactions) {
-        this.debit_transactions = debit_transactions;
-    }
 
     @Override
     public boolean equals(Object o) {

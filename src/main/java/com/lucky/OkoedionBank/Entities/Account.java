@@ -21,14 +21,14 @@ public class Account {
     @Column(nullable = false)
     private String account_name;
     @Column(nullable = false)
-    private AccountType account_type;
+    private String account_type;
 
     public Account() {
         this.account_balance = new BigDecimal("0");
     }
 
     public Account(String account_number, UserEntity user, BigDecimal account_balance,
-                   String account_name, AccountType account_type) {
+                   String account_name, String account_type) {
         super();
         this.account_balance = account_balance;
         this.account_name = account_name;
@@ -78,11 +78,11 @@ public class Account {
         this.account_name = account_name;
     }
 
-    public AccountType getAccount_type() {
+    public String getAccount_type() {
         return account_type;
     }
 
-    public void setAccount_type(AccountType account_type) {
+    public void setAccount_type(String account_type) {
         this.account_type = account_type;
     }
 

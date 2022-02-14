@@ -3,6 +3,7 @@ package com.lucky.OkoedionBank.Services.impl;
 import com.lucky.OkoedionBank.Entities.Account;
 import com.lucky.OkoedionBank.Repositories.AccountRepository;
 import com.lucky.OkoedionBank.Services.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +11,11 @@ import java.util.List;
 @Service
 public class AccountService implements IAccountService {
 
+    @Autowired
     private AccountRepository accountRepository;
 
-    public AccountService(AccountRepository theRepo) {
+    public AccountService() {
         super();
-        accountRepository = theRepo;
     }
 
     @Override

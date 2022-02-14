@@ -2,6 +2,7 @@ package com.lucky.OkoedionBank.Auth;
 
 import com.lucky.OkoedionBank.Entities.UserEntity;
 import com.lucky.OkoedionBank.Repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +13,10 @@ import static java.util.Collections.emptyList;
 
 @Service
 public class ApplicationUserDetailsService implements UserDetailsService {
+
+    @Autowired
     private UserRepository applicationUserRepository;
 
-    public ApplicationUserDetailsService(UserRepository applicationUserRepository) {
-        this.applicationUserRepository = applicationUserRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

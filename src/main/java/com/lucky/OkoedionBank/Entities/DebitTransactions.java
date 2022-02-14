@@ -14,7 +14,7 @@ public class DebitTransactions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private TransactionChannels debit_channel;
+    private String debit_channel;
     @OneToOne
     @MapsId
     private Account debited_account;
@@ -29,7 +29,7 @@ public class DebitTransactions {
     }
 
 
-    public DebitTransactions(TransactionChannels debit_channel, Account debited_account, BigDecimal amount, String timestamp) {
+    public DebitTransactions(String debit_channel, Account debited_account, BigDecimal amount, String timestamp) {
         super();
         this.debit_channel = debit_channel;
         this.debited_account = debited_account;
@@ -46,11 +46,11 @@ public class DebitTransactions {
         this.id = id;
     }
 
-    public TransactionChannels getDebit_channel() {
+    public String getDebit_channel() {
         return debit_channel;
     }
 
-    public void setDebit_channel(TransactionChannels debit_channel) {
+    public void setDebit_channel(String debit_channel) {
         this.debit_channel = debit_channel;
     }
 

@@ -17,13 +17,13 @@ import java.util.List;
 public class DebitTransactionsService implements IDebitTransactionsService {
 
     private DebitTransactionsRepository debitTransactionsRepository;
-    private IAlertService alertService;
+//    private IAlertService alertService;
     private ILoggingService loggingService;
 
     public DebitTransactionsService(DebitTransactionsRepository theRepo, AlertService alertService, LoggingService loggingService) {
         super();
         debitTransactionsRepository = theRepo;
-        alertService = alertService;
+//        alertService = alertService;
         loggingService = loggingService;
     }
 
@@ -42,7 +42,7 @@ public class DebitTransactionsService implements IDebitTransactionsService {
             String affectedUserMessage = theObj.getAmount() + "has been debited from your account." + " " + "Please if you did not initiate it, kindly contact customer care.";
             BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail());
 
-            alertService.sendSmsAlert(affectedUserAlert);
+//            alertService.sendSmsAlert(affectedUserAlert);
 
             LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
             LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);

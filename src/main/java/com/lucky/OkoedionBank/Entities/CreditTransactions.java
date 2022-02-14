@@ -27,7 +27,7 @@ public class CreditTransactions {
     @Column(nullable = false)
     private String timestamp;
     @Column(nullable = false)
-    private TransactionChannels credit_channel;
+    private String credit_channel;
 
     public CreditTransactions() {
 
@@ -35,7 +35,7 @@ public class CreditTransactions {
 
     public CreditTransactions(UserEntity recipient, UserEntity sender, Account sender_account,
                               Account recipient_account, BigDecimal amount,
-                              String timestamp, TransactionChannels credit_channel) {
+                              String timestamp, String credit_channel) {
         super();
         this.amount = amount;
         this.credit_channel = credit_channel;
@@ -104,11 +104,11 @@ public class CreditTransactions {
         this.timestamp = timestamp;
     }
 
-    public TransactionChannels getCredit_channel() {
+    public String getCredit_channel() {
         return credit_channel;
     }
 
-    public void setCredit_channel(TransactionChannels credit_channel) {
+    public void setCredit_channel(String credit_channel) {
         this.credit_channel = credit_channel;
     }
 
