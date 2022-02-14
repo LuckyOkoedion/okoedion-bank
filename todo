@@ -1,0 +1,59 @@
+
+spring.datasource.url=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASS}
+
+
+
+
+
+
+
+Create all needed packages, classes, e.t.c with tdd
+
+MODELS
+
+User - id, first_name, last_name, email, phone_number, address, password, accounts, credit_transactions, debit_transactions
+Account - id, user, account_name, account_type, account_number, account_balance
+CreditTransactions - id, recipient, sender, sender_account, recipient_account, amount, timestamp, credit_channel
+DebitTransactions - id, debited_account, debit_channel, amount
+Logs - id, source_class_name, event_description
+
+
+CONTROLLERS
+
+UserController - CRUD
+AccountController - CRUD
+CreditTransactionsController - CRUD
+DebitTransactionsController - CRUD
+RobotCpuController - CRUD
+
+REPOSITORIES
+UserRepository
+AccountRepository
+CreditTransactionRepository
+DebitTransactionsRepository
+LogsRepository
+
+
+SERVICES
+UserService - CRUD 
+AccountService - CRUD
+CreditTransactionsService - CRUD
+DebitTransactionsService - CRUD
+RobotCpuService - CRUD
+LoggingService
+AlertService
+
+
+Auth
+
+
+SecurityConfig
+CustomUserDetailsService
+AuthenticationFilter
+AuthorizationFilter
+
+
+
+
