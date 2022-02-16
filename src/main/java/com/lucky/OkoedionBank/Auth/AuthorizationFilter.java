@@ -1,5 +1,6 @@
 package com.lucky.OkoedionBank.Auth;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -43,8 +44,10 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken authenticate(HttpServletRequest request) {
         String token = request.getHeader(HEADER_NAME);
         if (token != null) {
-            Claims user = Jwts.parser()
+
+            Claims user = Jwts.parserBuilder()
                     .setSigningKey(Keys.hmacShaKeyFor(KEY.getBytes()))
+                    .build()
                     .parseClaimsJws(token)
                     .getBody();
 

@@ -1,5 +1,7 @@
 package com.lucky.OkoedionBank.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,22 +25,18 @@ public class UserEntity {
     private String address;
     @Column(nullable = false)
     private String password;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @MapsId
     private List<Account> accounts = new ArrayList<>();
-    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CreditTransactions> credit_transactions = new ArrayList<>();
 
     public UserEntity() {
 
     }
 
     public UserEntity(String email, String first_name, String last_name,
-                      String phone_number, String address, String password,
-                      List<Account> accounts, List<CreditTransactions> credit_transactions) {
+                      String phone_number, String address, String password) {
         super();
-        this.accounts = accounts;
         this.address = address;
-        this.credit_transactions = credit_transactions;
         this.first_name = first_name;
         this.email = email;
         this.last_name = last_name;
@@ -47,26 +45,12 @@ public class UserEntity {
     }
 
 
-    public void addAccount(Account theAccount) {
+    public void addAccounts(Account theAccount) {
         accounts.add(theAccount);
-        theAccount.setUser(this);
     }
 
-    public void removeAccount(Account theAccount) {
+    public void removeAccounts(Account theAccount) {
         accounts.remove(theAccount);
-        theAccount.setUser(null);
-    }
-
-    public void addCreditTransaction(CreditTransactions theCreditTrans) {
-        credit_transactions.add(theCreditTrans);
-        theCreditTrans.setRecipient(this);
-
-    }
-
-    public void removeCreditTransaction(CreditTransactions theCreditTrans) {
-        credit_transactions.remove(theCreditTrans);
-        theCreditTrans.setRecipient(null);
-
     }
 
 
@@ -132,14 +116,6 @@ public class UserEntity {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
-    }
-
-    public List<CreditTransactions> getCredit_transactions() {
-        return credit_transactions;
-    }
-
-    public void setCredit_transactions(List<CreditTransactions> credit_transactions) {
-        this.credit_transactions = credit_transactions;
     }
 
 

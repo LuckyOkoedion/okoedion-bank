@@ -1,8 +1,6 @@
 package com.lucky.OkoedionBank.Entities;
 
 
-import com.lucky.OkoedionBank.Pojo.TransactionChannels;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -14,7 +12,7 @@ public class DebitTransactions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String debit_channel;
+    private TransactionChannels debit_channel;
     @OneToOne
     @MapsId
     private Account debited_account;
@@ -29,7 +27,7 @@ public class DebitTransactions {
     }
 
 
-    public DebitTransactions(String debit_channel, Account debited_account, BigDecimal amount, String timestamp) {
+    public DebitTransactions(TransactionChannels debit_channel, Account debited_account, BigDecimal amount, String timestamp) {
         super();
         this.debit_channel = debit_channel;
         this.debited_account = debited_account;
@@ -46,11 +44,11 @@ public class DebitTransactions {
         this.id = id;
     }
 
-    public String getDebit_channel() {
+    public TransactionChannels getDebit_channel() {
         return debit_channel;
     }
 
-    public void setDebit_channel(String debit_channel) {
+    public void setDebit_channel(TransactionChannels debit_channel) {
         this.debit_channel = debit_channel;
     }
 

@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private ApplicationUserDetailsService userDetailsService;
 
     private static final String[] WHITELIST = {
-            "/user"
+            "/register"
     };
 
     private static final String[] AUTH = {
@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(WHITELIST).permitAll()
                 .antMatchers(AUTH).authenticated()
-                .antMatchers("/**").permitAll()
                 .and()
                 .addFilter(new AuthenticationFilter(authenticationManager()))
                 .addFilter(new AuthorizationFilter(authenticationManager()))

@@ -1,7 +1,9 @@
 package com.lucky.OkoedionBank.Services.impl;
 
-import com.lucky.OkoedionBank.Pojo.BankAlert;
+import com.lucky.OkoedionBank.Entities.BankAlert;
+import com.lucky.OkoedionBank.Repositories.AlertsRepository;
 import com.lucky.OkoedionBank.Services.IAlertService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twilio.Twilio;
@@ -14,6 +16,8 @@ public class AlertService implements IAlertService {
 
     private String ACCOUNT_SID;
     private String AUTH_TOKEN;
+    @Autowired
+    private AlertsRepository alertsRepository;
 
     public AlertService() {
 //        ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
@@ -27,6 +31,8 @@ public class AlertService implements IAlertService {
     }
 
 
+
+
     @Override
     public void sendSmsAlert(BankAlert theAlert) {
         Message.creator(new PhoneNumber(theAlert.getRecipientPhoneNumber()), new PhoneNumber("Okoedion-Bank"), theAlert.getMessage()).create();
@@ -36,5 +42,10 @@ public class AlertService implements IAlertService {
     @Override
     public void sendEmailAlert(BankAlert theAlert) {
 //        TODO
+    }
+
+    @Override
+    public void sendAppAlert(BankAlert theAlert) {
+        alertsRepository.save(theAlert);
     }
 }
