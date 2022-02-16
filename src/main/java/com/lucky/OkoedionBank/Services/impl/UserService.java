@@ -41,18 +41,22 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDto create(UserEntity theObj) {
+    public UserDto create(SignupDto theObj) {
 //        Create a user and generate bank account for him/her
         String encodedPassword = bCryptPasswordEncoder.encode(theObj.getPassword());
-        theObj.setPassword(encodedPassword);
-        UserEntity theUser = userRepository.save(theObj);
+        UserEntity theInput = new UserEntity();
+        theInput.setAddress(theObj.getAddress());
+        theInput.setEmail(theObj.getEmail());
+        theInput.setFirst_name(theObj.getFirst_name());
+        theInput.setLast_name(theObj.getLast_name());
+        theInput.setPhone_number(theObj.getPhone_number());
+        theInput.setPassword(encodedPassword);
+        UserEntity theUser = userRepository.save(theInput);
         Account account = new Account();
-        account.setUser(theUser);
         account.setAccount_name(theUser.getFirst_name() + " " + theUser.getLast_name());
         account.setAccount_type("PRIVATE");
         account.setAccount_number(generateAccountNumber());
         Account theAccount = accountService.create(account);
-        theUser.addAccount(theAccount);
         UserEntity finalUser = userRepository.save(theUser);
         UserDto userResponse = new UserDto();
         userResponse.setAccounts(finalUser.getAccounts());
@@ -61,22 +65,22 @@ public class UserService implements IUserService {
         userResponse.setLast_name(finalUser.getLast_name());
         userResponse.setFirst_name(finalUser.getFirst_name());
         userResponse.setPhone_number(finalUser.getPhone_number());
-        userResponse.setCredit_transactions(finalUser.getCredit_transactions());
         userResponse.setId(finalUser.getId());
 
 //        Send alert and log the event
 
-        UserEntity affectedUser = finalUser;
-        String affectedUserMessage = "Welcome to Okoedion Bank. Your new Account number is" + theAccount.getAccount_number() + "Visit any branch to pick your ATM.";
-        BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail());
-
-        alertService.sendSmsAlert(affectedUserAlert);
-
-        LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
-        LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);
-
-        loggingService.localLogInfo(logMessage);
-        loggingService.logToDb(logMessage);
+//        UserEntity affectedUser = finalUser;
+//        String affectedUserMessage = "Welcome to Okoedion Bank. Your new Account number is" + theAccount.getAccount_number() + "Visit any branch to pick your ATM.";
+//        BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail(), affectedUser.getId());
+//
+////        alertService.sendSmsAlert(affectedUserAlert);
+//        alertService.sendAppAlert(affectedUserAlert);
+//
+//        LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
+//        LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);
+//
+//        loggingService.localLogInfo(logMessage);
+//        loggingService.logToApp(logMessage);
 
 
         return userResponse;

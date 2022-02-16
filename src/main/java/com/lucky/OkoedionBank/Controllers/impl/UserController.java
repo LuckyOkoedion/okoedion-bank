@@ -5,7 +5,6 @@ import com.lucky.OkoedionBank.Entities.UserEntity;
 import com.lucky.OkoedionBank.Pojo.UserDto;
 import com.lucky.OkoedionBank.Services.IUserService;
 import com.lucky.OkoedionBank.Services.impl.UserService;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,16 +42,6 @@ public class UserController implements IUserController {
         }
     }
 
-    @PostMapping("/register")
-    @Override
-    public ResponseEntity<UserDto> create(@RequestBody UserEntity theObj) {
-        try {
-            return new ResponseEntity<>(userService.create(theObj), HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
     @GetMapping("/{id}")
     @Override

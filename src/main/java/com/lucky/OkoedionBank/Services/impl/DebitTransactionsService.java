@@ -37,19 +37,19 @@ public class DebitTransactionsService implements IDebitTransactionsService {
         DebitTransactions theResult = debitTransactionsRepository.save(theObj);
 //        Send alert and log transaction
 
-        if(theResult != null) {
-            UserEntity affectedUser = theObj.getDebited_account().getUser();
-            String affectedUserMessage = theObj.getAmount() + "has been debited from your account." + " " + "Please if you did not initiate it, kindly contact customer care.";
-            BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail());
-
-//            alertService.sendSmsAlert(affectedUserAlert);
-
-            LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
-            LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);
-
-            loggingService.localLogInfo(logMessage);
-            loggingService.logToDb(logMessage);
-        }
+//        if(theResult != null) {
+//            UserEntity affectedUser = theObj.getDebited_account().getUser();
+//            String affectedUserMessage = theObj.getAmount() + "has been debited from your account." + " " + "Please if you did not initiate it, kindly contact customer care.";
+//            BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail());
+//
+////            alertService.sendSmsAlert(affectedUserAlert);
+//
+//            LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
+//            LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);
+//
+//            loggingService.localLogInfo(logMessage);
+//            loggingService.logToDb(logMessage);
+//        }
 
         return  theResult;
     }

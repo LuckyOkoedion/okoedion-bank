@@ -44,13 +44,13 @@ public class CreditTransactionsService implements ICreditTransactionsService {
 
         if(theResult != null) {
             //        send alert and log transaction
-            UserEntity sender = theObj.getSender();
-            UserEntity reciever = theObj.getRecipient();
-            String senderMessage = theObj.getAmount() + "has been transfered from your account to" + " " + theObj.getRecipient_account() + " " + "Please if you did not initiate it, kindly contact customer care.";
-            String recipientMessage = "Your account:" + " " + "has been credited with" + " " + theObj.getAmount() + " " + "from" + " " + theObj.getSender_account();
-
-            BankAlert senderAlert = new BankAlert(senderMessage, sender.getPhone_number(), sender.getEmail());
-            BankAlert recipientAlert = new BankAlert(recipientMessage, reciever.getPhone_number(), reciever.getEmail() );
+//            UserEntity sender = theObj.getSender();
+//            UserEntity reciever = theObj.getRecipient();
+//            String senderMessage = theObj.getAmount() + "has been transfered from your account to" + " " + theObj.getRecipient_account() + " " + "Please if you did not initiate it, kindly contact customer care.";
+//            String recipientMessage = "Your account:" + " " + "has been credited with" + " " + theObj.getAmount() + " " + "from" + " " + theObj.getSender_account();
+//
+//            BankAlert senderAlert = new BankAlert(senderMessage, sender.getPhone_number(), sender.getEmail());
+//            BankAlert recipientAlert = new BankAlert(recipientMessage, reciever.getPhone_number(), reciever.getEmail() );
 
 //            alertService.sendSmsAlert(senderAlert);
 //            alertService.sendSmsAlert(recipientAlert);
