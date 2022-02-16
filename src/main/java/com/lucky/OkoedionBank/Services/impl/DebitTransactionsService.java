@@ -2,11 +2,10 @@ package com.lucky.OkoedionBank.Services.impl;
 
 import com.lucky.OkoedionBank.Entities.DebitTransactions;
 import com.lucky.OkoedionBank.Entities.UserEntity;
-import com.lucky.OkoedionBank.Pojo.BankAlert;
-import com.lucky.OkoedionBank.Pojo.LoggableEventMessage;
-import com.lucky.OkoedionBank.Pojo.LoggableEventSource;
+import com.lucky.OkoedionBank.Entities.BankAlert;
+import com.lucky.OkoedionBank.Entities.LoggableEventMessage;
+import com.lucky.OkoedionBank.Entities.LoggableEventSource;
 import com.lucky.OkoedionBank.Repositories.DebitTransactionsRepository;
-import com.lucky.OkoedionBank.Services.IAlertService;
 import com.lucky.OkoedionBank.Services.IDebitTransactionsService;
 import com.lucky.OkoedionBank.Services.ILoggingService;
 import org.springframework.stereotype.Service;
@@ -37,19 +36,19 @@ public class DebitTransactionsService implements IDebitTransactionsService {
         DebitTransactions theResult = debitTransactionsRepository.save(theObj);
 //        Send alert and log transaction
 
-        if(theResult != null) {
-            UserEntity affectedUser = theObj.getDebited_account().getUser();
-            String affectedUserMessage = theObj.getAmount() + "has been debited from your account." + " " + "Please if you did not initiate it, kindly contact customer care.";
-            BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail());
-
-//            alertService.sendSmsAlert(affectedUserAlert);
-
-            LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
-            LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);
-
-            loggingService.localLogInfo(logMessage);
-            loggingService.logToDb(logMessage);
-        }
+//        if(theResult != null) {
+//            UserEntity affectedUser = theObj.getDebited_account().getUser();
+//            String affectedUserMessage = theObj.getAmount() + "has been debited from your account." + " " + "Please if you did not initiate it, kindly contact customer care.";
+//            BankAlert affectedUserAlert = new BankAlert(affectedUserMessage, affectedUser.getPhone_number(), affectedUser.getEmail());
+//
+////            alertService.sendSmsAlert(affectedUserAlert);
+//
+//            LoggableEventSource logSource = new LoggableEventSource(this.getClass().getName());
+//            LoggableEventMessage logMessage = new LoggableEventMessage("Debit Transaction Occurred", logSource);
+//
+//            loggingService.localLogInfo(logMessage);
+//            loggingService.logToApp(logMessage);
+//        }
 
         return  theResult;
     }

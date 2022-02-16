@@ -1,5 +1,9 @@
 package com.lucky.OkoedionBank.Pojo;
 
+import com.lucky.OkoedionBank.Entities.AccountType;
+import com.lucky.OkoedionBank.Entities.CurrencyType;
+import com.lucky.OkoedionBank.Entities.TransactionChannels;
+
 public final class BankConstants {
     public static final AccountType PRIVATE_ACCOUNT_TYPE = new AccountType(AccountTypeEnum.PRIVATE);
     public static final AccountType CORPORATE_ACCOUNT_TYPE = new AccountType(AccountTypeEnum.CORPORATE);
@@ -11,4 +15,5 @@ public final class BankConstants {
     public static final TransactionChannels OVER_THE_COUNTER_CREDIT_CHANNEL = new TransactionChannels(TransactionChannelsEnum.OVER_THE_COUNTER);
     public static final TransactionChannels MOBILE_APP_CREDIT_CHANNEL = new TransactionChannels(TransactionChannelsEnum.MOBILE_APP);
     public static final TransactionChannels WEB_APP_CREDIT_CHANNEL = new TransactionChannels(TransactionChannelsEnum.WEB_APP);
+    public static final CurrencyType NIGERIA_NAIRA = new CurrencyType("Naira", "NGN");
 }

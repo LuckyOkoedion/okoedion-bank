@@ -1,10 +1,10 @@
 package com.lucky.OkoedionBank.Entities;
 
-import com.lucky.OkoedionBank.Pojo.AccountType;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+
+import static com.lucky.OkoedionBank.Pojo.BankConstants.NIGERIA_NAIRA;
 
 @Entity
 @Table
@@ -14,27 +14,24 @@ public class Account {
     private Long id;
     @Column(nullable = false, unique = true)
     private String account_number;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity user;
     @Column
-    private BigDecimal account_balance;
+    private Money account_balance;
     @Column(nullable = false)
     private String account_name;
     @Column(nullable = false)
     private String account_type;
 
     public Account() {
-        this.account_balance = new BigDecimal("0");
+        this.account_balance = new Money(new BigDecimal("0"), NIGERIA_NAIRA);
     }
 
-    public Account(String account_number, UserEntity user, BigDecimal account_balance,
+    public Account(String account_number,
                    String account_name, String account_type) {
         super();
-        this.account_balance = account_balance;
+        this.account_balance = new Money(new BigDecimal("0"), NIGERIA_NAIRA);
         this.account_name = account_name;
         this.account_number = account_number;
         this.account_type = account_type;
-        this.user = user;
     }
 
 
@@ -54,19 +51,11 @@ public class Account {
         this.account_number = account_number;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public BigDecimal getAccount_balance() {
+    public Money getAccount_balance() {
         return account_balance;
     }
 
-    public void setAccount_balance(BigDecimal account_balance) {
+    public void setAccount_balance(Money account_balance) {
         this.account_balance = account_balance;
     }
 

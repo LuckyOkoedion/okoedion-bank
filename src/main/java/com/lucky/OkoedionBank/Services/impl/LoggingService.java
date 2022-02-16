@@ -1,8 +1,7 @@
 package com.lucky.OkoedionBank.Services.impl;
 
-import com.lucky.OkoedionBank.Entities.Logs;
-import com.lucky.OkoedionBank.Pojo.LoggableEventMessage;
-import com.lucky.OkoedionBank.Pojo.LoggableEventSource;
+import com.lucky.OkoedionBank.Entities.ActivityLogs;
+import com.lucky.OkoedionBank.Entities.LoggableEventMessage;
 import com.lucky.OkoedionBank.Repositories.LogsRepository;
 import com.lucky.OkoedionBank.Services.ILoggingService;
 import org.apache.logging.log4j.Logger;
@@ -25,13 +24,13 @@ public class LoggingService implements ILoggingService {
     }
 
     @Override
-    public void logToDb(LoggableEventMessage message) {
-        Logs theObj = new Logs();
-        theObj.setSource_class_name(message.getSource().getClassName());
-        theObj.setEvent_description(message.getMessageText());
-        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-        theObj.setTimestamp(timestamp);
-        logsRepository.save(theObj);
+    public void logToApp(LoggableEventMessage message) {
+//        ActivityLogs theObj = new ActivityLogs();
+//        theObj.setEvent_source(message.getSource().getClassName());
+//        theObj.setEvent_description(message.getMessageText());
+//        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+//        theObj.setTimestamp(timestamp);
+//        logsRepository.save(theObj);
     }
 
     @Override

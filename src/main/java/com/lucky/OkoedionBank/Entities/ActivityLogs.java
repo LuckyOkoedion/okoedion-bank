@@ -2,31 +2,33 @@ package com.lucky.OkoedionBank.Entities;
 
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table
-public class Logs {
+public class ActivityLogs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String source_class_name;
+    private LoggableEventSource event_source;
     @Column(nullable = false)
-    private String event_description;
+    private LoggableEventMessage event_description;
     @Column(nullable = false)
     private String timestamp;
 
 
-    public Logs() {
+    public ActivityLogs() {
 
     }
 
-    public Logs(String source_class_name, String event_description, String timestamp) {
+    public ActivityLogs(LoggableEventSource event_source, LoggableEventMessage event_description) {
         super();
         this.event_description = event_description;
-        this.source_class_name = source_class_name;
-        this.timestamp = timestamp;
+        this.event_source = event_source;
+        this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
     }
 
     public Long getId() {
@@ -37,19 +39,19 @@ public class Logs {
         this.id = id;
     }
 
-    public String getSource_class_name() {
-        return source_class_name;
+    public LoggableEventSource getEvent_source() {
+        return event_source;
     }
 
-    public void setSource_class_name(String source_class_name) {
-        this.source_class_name = source_class_name;
+    public void setEvent_source(LoggableEventSource event_source) {
+        this.event_source = event_source;
     }
 
-    public String getEvent_description() {
+    public LoggableEventMessage getEvent_description() {
         return event_description;
     }
 
-    public void setEvent_description(String event_description) {
+    public void setEvent_description(LoggableEventMessage event_description) {
         this.event_description = event_description;
     }
 
@@ -64,8 +66,8 @@ public class Logs {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Logs)) return false;
-        Logs logs = (Logs) o;
+        if (!(o instanceof ActivityLogs)) return false;
+        ActivityLogs logs = (ActivityLogs) o;
         return getId().equals(logs.getId());
     }
 

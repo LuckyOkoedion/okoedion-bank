@@ -2,10 +2,10 @@ package com.lucky.OkoedionBank.Services;
 
 import java.util.List;
 
-public interface ICrudServiceWithSeparateResponse<T, E> {
+public interface ICrudServiceWithSeparateResponse<T, E, M> {
     List<E> getAll();
 
-    E create(T theObj);
+    E create(M theObj);
 
     E getOneById(Long id);
 

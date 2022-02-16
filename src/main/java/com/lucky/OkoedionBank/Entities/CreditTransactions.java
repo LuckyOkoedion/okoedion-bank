@@ -1,7 +1,5 @@
 package com.lucky.OkoedionBank.Entities;
 
-import com.lucky.OkoedionBank.Pojo.TransactionChannels;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -12,10 +10,10 @@ public class CreditTransactions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity recipient;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity sender;
+    @Column
+    private Long recipient;
+    @Column
+    private Long sender;
     @OneToOne
     @MapsId
     private Account sender_account;
@@ -33,7 +31,7 @@ public class CreditTransactions {
 
     }
 
-    public CreditTransactions(UserEntity recipient, UserEntity sender, Account sender_account,
+    public CreditTransactions(Long recipient, Long sender, Account sender_account,
                               Account recipient_account, BigDecimal amount,
                               String timestamp, String credit_channel) {
         super();
@@ -56,19 +54,19 @@ public class CreditTransactions {
         this.id = id;
     }
 
-    public UserEntity getRecipient() {
+    public Long getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(UserEntity recipient) {
+    public void setRecipient(Long recipient) {
         this.recipient = recipient;
     }
 
-    public UserEntity getSender() {
+    public Long getSender() {
         return sender;
     }
 
-    public void setSender(UserEntity sender) {
+    public void setSender(Long sender) {
         this.sender = sender;
     }
 

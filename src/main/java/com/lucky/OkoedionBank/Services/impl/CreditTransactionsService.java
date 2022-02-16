@@ -2,11 +2,10 @@ package com.lucky.OkoedionBank.Services.impl;
 
 import com.lucky.OkoedionBank.Entities.CreditTransactions;
 import com.lucky.OkoedionBank.Entities.UserEntity;
-import com.lucky.OkoedionBank.Pojo.BankAlert;
-import com.lucky.OkoedionBank.Pojo.LoggableEventMessage;
-import com.lucky.OkoedionBank.Pojo.LoggableEventSource;
+import com.lucky.OkoedionBank.Entities.BankAlert;
+import com.lucky.OkoedionBank.Entities.LoggableEventMessage;
+import com.lucky.OkoedionBank.Entities.LoggableEventSource;
 import com.lucky.OkoedionBank.Repositories.CreditTransactionRepository;
-import com.lucky.OkoedionBank.Services.IAlertService;
 import com.lucky.OkoedionBank.Services.ICreditTransactionsService;
 import com.lucky.OkoedionBank.Services.ILoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +43,13 @@ public class CreditTransactionsService implements ICreditTransactionsService {
 
         if(theResult != null) {
             //        send alert and log transaction
-            UserEntity sender = theObj.getSender();
-            UserEntity reciever = theObj.getRecipient();
-            String senderMessage = theObj.getAmount() + "has been transfered from your account to" + " " + theObj.getRecipient_account() + " " + "Please if you did not initiate it, kindly contact customer care.";
-            String recipientMessage = "Your account:" + " " + "has been credited with" + " " + theObj.getAmount() + " " + "from" + " " + theObj.getSender_account();
-
-            BankAlert senderAlert = new BankAlert(senderMessage, sender.getPhone_number(), sender.getEmail());
-            BankAlert recipientAlert = new BankAlert(recipientMessage, reciever.getPhone_number(), reciever.getEmail() );
+//            UserEntity sender = theObj.getSender();
+//            UserEntity reciever = theObj.getRecipient();
+//            String senderMessage = theObj.getAmount() + "has been transfered from your account to" + " " + theObj.getRecipient_account() + " " + "Please if you did not initiate it, kindly contact customer care.";
+//            String recipientMessage = "Your account:" + " " + "has been credited with" + " " + theObj.getAmount() + " " + "from" + " " + theObj.getSender_account();
+//
+//            BankAlert senderAlert = new BankAlert(senderMessage, sender.getPhone_number(), sender.getEmail());
+//            BankAlert recipientAlert = new BankAlert(recipientMessage, reciever.getPhone_number(), reciever.getEmail() );
 
 //            alertService.sendSmsAlert(senderAlert);
 //            alertService.sendSmsAlert(recipientAlert);
@@ -59,7 +58,7 @@ public class CreditTransactionsService implements ICreditTransactionsService {
             LoggableEventMessage logMessage = new LoggableEventMessage("Credit Transaction Occurred", logSource);
 
             loggingService.localLogInfo(logMessage);
-            loggingService.logToDb(logMessage);
+            loggingService.logToApp(logMessage);
         }
 
         return  theResult;
