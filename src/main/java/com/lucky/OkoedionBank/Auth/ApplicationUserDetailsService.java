@@ -25,6 +25,12 @@ public class ApplicationUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
+
+//        return new User(
+//                email,
+//                user.getPassword(),
+//                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+
     }
 
 }

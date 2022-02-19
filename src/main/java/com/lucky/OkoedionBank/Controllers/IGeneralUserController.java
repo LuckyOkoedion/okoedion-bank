@@ -9,7 +9,7 @@ import java.util.List;
 public interface IGeneralUserController<T, E>  {
 
     @GetMapping
-    ResponseEntity<List<E>> getAll();
+    ResponseEntity<List<T>> getAll();
 
     @GetMapping("/{id}")
     ResponseEntity<E> getOneById(@PathVariable(value="id") Long id);

@@ -3,7 +3,7 @@ package com.lucky.OkoedionBank.Services;
 import java.util.List;
 
 public interface ICrudServiceWithSeparateResponse<T, E, M> {
-    List<E> getAll();
+    List<T> getAll();
 
     E create(M theObj);
 

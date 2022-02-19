@@ -33,7 +33,7 @@ public class UserController implements IUserController {
 
     @GetMapping
     @Override
-    public ResponseEntity<List<UserDto>> getAll() {
+    public ResponseEntity<List<UserEntity>> getAll() {
         try {
             return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
         }

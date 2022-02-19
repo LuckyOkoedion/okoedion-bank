@@ -1,5 +1,6 @@
 package com.lucky.OkoedionBank.Controllers;
 
+import com.lucky.OkoedionBank.Pojo.LoginDto;
 import com.lucky.OkoedionBank.Pojo.SignupDto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,4 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IAuthController {
     @PostMapping
     <T> T register(@RequestBody SignupDto theObj);
+    @PostMapping
+    <T> T login(@RequestBody LoginDto theObj);
 }

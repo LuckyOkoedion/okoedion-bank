@@ -36,8 +36,9 @@ public class UserService implements IUserService {
 
 
     @Override
-    public List<UserDto> getAll() {
-        return null;
+    public List<UserEntity> getAll() {
+        List<UserEntity> result =  userRepository.findAll();
+       return result;
     }
 
     @Override
